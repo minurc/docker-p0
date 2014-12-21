@@ -1,0 +1,8 @@
+#!/bin/sh
+
+
+# docker run --volumes-from storage --name dns -d punkto0/dns /sbin/my_init -- /bin/bash
+docker run -p 53:53/udp -p 10000:10000 --name dns -d punkto0/dns
+
+
+

@@ -1,0 +1,8 @@
+#!/bin/sh
+
+
+# Run docker and map host "/storage" to docker volume :)
+docker run -v /storage:/storage --name storage storage true
+
+
+

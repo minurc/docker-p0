@@ -1,0 +1,7 @@
+#!/bin/sh
+
+
+docker run --volumes-from storage --name git -ti punkto0/git /bin/bash
+
+
+
