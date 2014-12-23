@@ -1,0 +1,34 @@
+#!/bin/sh
+
+host=$1
+
+[ -d /data/$host ] || mkdir -p /data/$host
+
+
+# To get all the /dev/* devices needed for sshd and alike:
+export DEV_MOUNTS="-v /dev/null:/dev/null -v /dev/urandom:/dev/urandom -v /dev/random:/dev/random"
+export DEV_MOUNTS="${DEV_MOUNTS} -v /dev/full:/dev/full -v /dev/zero:/dev/zero"
+export DATA_VOLUME="-v /data/$host:/data"
+
+docker run -t -i ${DEV_MOUNTS} ${DATA_VOLUME} --name="$host" \
+           -p 4422:22 -p 4480:80 -p 49201:9200 -p 49301:9300 -p 4511:5514\
+           punkto0/elk /bin/bash
+
+
+
+
+
+### EOF
+
+# # To get all the /dev/* devices needed for sshd and alike:
+# export DEV_MOUNTS="-v /dev/null:/dev/null -v /dev/urandom:/dev/urandom -v /dev/random:/dev/random"
+# export DEV_MOUNTS="${DEV_MOUNTS} -v /dev/full:/dev/full -v /dev/zero:/dev/zero"
+# # if you got an etcd/helixdns instance running
+# export DNS_STUFF="--dns=172.17.0.3"
+# # if you want to store Elasticsearchs data outside 
+# mkdir -p ${HOME}/elasticsearch
+# export ES_PERSIST="-v ${HOME}/elasticsearch:/var/lib/elasticsearch"
+# docker run -t -i --rm -h elk --name elk --privileged \
+#     --link carbon:carbon --privileged ${DNS_STUFF} ${DEV_MOUNTS} \
+#     ${ES_PERSIST} qnib/elk:latest -p 9200:9200 -p 9300:9300 -p 8080:80 -p 5514:5514 /bin/bash
+#
