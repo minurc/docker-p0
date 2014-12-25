@@ -25,4 +25,4 @@ http://phusion.github.io/baseimage-docker/
 
     ElasticSearch, Logstash and Kibana
 
-
+---
