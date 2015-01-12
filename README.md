@@ -21,6 +21,10 @@ http://phusion.github.io/baseimage-docker/
 
     dns forwarder service
 
+- backup
+
+    backup service for docker container
+
 - elk
 
     ElasticSearch, Logstash and Kibana

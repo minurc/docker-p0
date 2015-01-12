@@ -1,0 +1,9 @@
+#!/bin/sh
+
+STORAGE="storage"     # name of docker which data needs backup
+BACKUP="/data/backup" # backup destination on host
+
+docker run --volumes-from $STORAGE -v $BACKUP:/backup --name backup -ti punkto0/backup /bin/bash
+
+
+
